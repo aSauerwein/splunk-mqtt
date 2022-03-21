@@ -37,7 +37,7 @@ insecure_skip_verify: false
 export BROKER=tcp://192.168.1.1:1883
 export HEC_URL=https://hec.splunk.com
 export HEC_TOKEN=xxxxxxx-xxxx-xxxx-xxxx-073155c4c54e
-export MQTT_USRENAME=splunk
+export MQTT_USERNAME=splunk
 export MQTT_PASSWORD=abcde12345
 export CLIENT_ID=mqtt_subscribe
 export WRITE_TO_CONSOLE=true
@@ -55,4 +55,15 @@ Connection is up
 connection established
 subscribed to:  tele/+/SENSOR
 subscribed to:  tele/some/SENSOR
+```
+## run docker
+```
+docker run \
+-e BROKER=tcp://192.168.1.1:1883 \
+-e HEC_URL=https://hec.splunk.com \
+-e HEC_TOKEN=xxxxxxx-xxxx-xxxx-xxxx-073155c4c54e \
+-e TOPICS=tele/+/SENSOR,tele/some/SENSOR \
+-e WRITE_TO_CONSOLE=true \
+-e WRITE_TO_SPLUNK=true \
+splunk-mqtt
 ```
