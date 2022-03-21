@@ -51,7 +51,7 @@ func ReadconfigFile(cfg *config) {
 	yfile, err := ioutil.ReadFile("config.yaml")
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("Error opening file: ", err)
 	}
 	err2 := yaml.Unmarshal(yfile, &conf)
 	if err2 != nil {
