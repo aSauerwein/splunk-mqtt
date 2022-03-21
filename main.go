@@ -115,6 +115,8 @@ func main() {
 	fmt.Println("MQTT Broker: ", conf.Broker)
 	fmt.Println("MQTT Username: ", conf.MqttUsername)
 	fmt.Println("Splunk HEC URL: ", conf.HecUrl)
+	fmt.Println("Write to Console enabled: ", conf.WriteToConsole)
+	fmt.Println("Write to Splunk enabled: ", conf.WriteToSplunk)
 
 	// Enable logging by uncommenting the below
 	// mqtt.ERROR = log.New(os.Stdout, "[ERROR] ", 0)
