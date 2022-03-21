@@ -11,7 +11,7 @@ SPLUNK-MQTT is a simple go binary used to connect to a MQTT broker and stream Me
 | hec_token  | HEC_TOKEN  | ""  |  yes | Splunk HEC token  |
 | client_id  | CLIENT_ID  | ""  |  no | MQTT Client ID  |
 | write_to_console  |  WRITE_TO_CONSOLE |  false |  no | Write received MQTT messages to console  |
-| write_to_splunk  |  WRITE_TO_SPLUNK | true | no  | Write received MQTT messaged to splunk  |
+| write_to_splunk  |  WRITE_TO_SPLUNK | false | no  | Write received MQTT messaged to splunk  |
 | topics  | TOPICS  |  "" |  yes |  List of MQTT Topics to subscribe |
 | insecure_skip_verify  | INSECURE_SKIP_VERIFY  | false  | no  | Skip TLS Verification  |
 
