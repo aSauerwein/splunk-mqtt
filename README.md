@@ -2,6 +2,8 @@
 SPLUNK-MQTT is a simple go binary used to connect to a MQTT broker and stream Messages directly into Splunk HEC
 
 ## config
+splunk-mqtt tries to open config.yaml in the current working directory.
+environment variables take precedence over config.yaml variables
 |  config.yaml | ENVIRONMENT  |  Default |  Required | Description |
 |---|---|---|---|---|
 | broker  | BROKER  |  "" | yes  | MQTT Broker URL. tcp://192.168.1.1:1883  |
@@ -67,3 +69,8 @@ docker run \
 -e WRITE_TO_SPLUNK=true \
 splunk-mqtt
 ```
+
+## Licenses of dependencies
+- github.com/eclipse/paho.mqtt.golang [Eclipse Public License - v 1.0](https://github.com/eclipse/paho.mqtt.golang/blob/master/LICENSE)
+- github.com/jhop310/splunk-hec-go [Apache License 2.0](https://github.com/jhop310/splunk-hec-go/blob/master/LICENSE)
+- github.com/kelseyhightower/envconfig [MIT License](https://github.com/kelseyhightower/envconfig/blob/master/LICENSE)
