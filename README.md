@@ -1,6 +1,14 @@
 # splunk-mqtt
 SPLUNK-MQTT is a simple go binary used to connect to a MQTT broker and stream Messages directly into Splunk HEC
 
+## Features
+
+- [x] subscribe multiple topics at mqtt broker
+- [x] send events to Splunk HEC
+- [x] output received messages to console
+- [ ] use tls to connect to mqtt broker
+- [ ] caching
+
 ## config
 splunk-mqtt tries to open config.yaml in the current working directory.
 environment variables take precedence over config.yaml variables
