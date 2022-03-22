@@ -26,6 +26,9 @@ import (
 
 var conf config
 
+// curent program version
+const version = "0.1.0"
+
 // config is a stuct for holding runtime configuration
 type config struct {
 	Broker             string   `yaml:"broker" envconfig:"BROKER"`
@@ -106,6 +109,8 @@ func (o *handler) handle(_ mqtt.Client, msg mqtt.Message) {
 }
 
 func main() {
+	// print out version
+	fmt.Println("splunk-mqtt version: ", version)
 	// read config from file
 	ReadconfigFile(&conf)
 	// overwrite config with env variable
