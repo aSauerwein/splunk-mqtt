@@ -75,7 +75,7 @@ docker run \
 -e TOPICS=tele/+/SENSOR,tele/some/SENSOR \
 -e WRITE_TO_CONSOLE=true \
 -e WRITE_TO_SPLUNK=true \
-splunk-mqtt
+asauerwein/splunk-mqtt:0.1.0-alpha
 ```
 
 ## Licenses of dependencies
