@@ -1,14 +1,13 @@
-#build stage
-FROM golang:alpine AS builder
-RUN apk add --no-cache git
+# Start by building the application.
+FROM golang:1.19 as builder
+
 WORKDIR /go/src/app
 COPY . .
-RUN go get -d -v ./...
-RUN go build -o /go/bin/splunk-mqtt -v ./...
 
-#final stage
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o /go/bin/splunk-mqtt
+
+# Now copy it into our base image.
+FROM gcr.io/distroless/static-debian11
 COPY --from=builder /go/bin/splunk-mqtt /splunk-mqtt
-ENTRYPOINT /splunk-mqtt
-LABEL Name=splunkmqtt Version=0.0.1
+CMD ["/splunk-mqtt"]
