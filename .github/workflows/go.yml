@@ -5,8 +5,7 @@ on:
     types: [published]
 
 jobs:
-
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -14,21 +13,75 @@ jobs:
         goarch: ["arm", "arm64", "386", "amd64"]
         go: ["1.17"]
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - name: Set up Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: ${{ matrix.go }}
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
 
-    - name: Build
-      env:
-        GOOS: ${{ matrix.goos }}
-        GOARCH: ${{ matrix.goarch }}
-      run: go build -o splunk-mqtt-$GOOS-$GOARCH-$GITHUB_REF_NAME -v ./...
-    - name: Test
-      run: go test -v ./...
-    - name: Release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: splunk-mqtt-*
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o splunk-mqtt-$GOOS-$GOARCH-$GITHUB_REF_NAME -v ./...
+      - name: Test
+        run: go test -v ./...
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: splunk-mqtt-*
+
+  build-darwin:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [darwin]
+        goarch: ["amd64", "arm64"]
+        go: ["1.17"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o splunk-mqtt-$GOOS-$GOARCH-$GITHUB_REF_NAME -v ./...
+      - name: Test
+        run: go test -v ./...
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: splunk-mqtt-*
+
+  build-windows:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [windows]
+        goarch: ["amd64", "arm64"]
+        go: ["1.17"]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Build
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: go build -o splunk-mqtt-$GOOS-$GOARCH-$GITHUB_REF_NAME -v ./...
+      - name: Test
+        run: go test -v ./...
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: splunk-mqtt-*
