@@ -1,6 +1,6 @@
 module github.com/aSauerwein/splunk-mqtt
 
-go 1.17
+go 1.19
 
 require (
 	github.com/eclipse/paho.mqtt.golang v1.3.5
