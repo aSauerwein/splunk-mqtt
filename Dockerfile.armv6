@@ -1,0 +1,13 @@
+# Start by building the application.
+FROM golang:1.19 as builder
+
+WORKDIR /go/src/app
+COPY . .
+
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o /go/bin/splunk-mqtt
+
+# Now copy it into our base image.
+FROM FROM alpine:3.17.1
+COPY --from=builder /go/bin/splunk-mqtt /splunk-mqtt
+CMD ["/splunk-mqtt"]
