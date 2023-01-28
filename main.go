@@ -15,6 +15,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
 	"time"
 
@@ -84,13 +85,24 @@ func NewHandler() *handler {
 
 // handle is called when a message is received
 func (o *handler) handle(_ mqtt.Client, msg mqtt.Message) {
-	// We extract the count and write that out first to simplify checking for missing values
-	var message map[string]interface{}
-	err := json.Unmarshal(msg.Payload(), &message)
-	if err != nil {
-		fmt.Printf("Message could not be parsed (%s): %s", msg.Payload(), err)
+	// prepare map for sending to hec
+	var message = make(map[string]interface{})
+	// save msg as string to conert easily
+	message_string := string(msg.Payload())
+	// check if payload can be converted to number
+	messagePayload, interr := strconv.Atoi(message_string)
+	if interr != nil {
+		fmt.Printf("no number: %s\n", msg.Payload())
+		// check if payload can be unmarshalled as json
+		err := json.Unmarshal(msg.Payload(), &message)
+		if err != nil {
+			fmt.Printf("Message could not be parsed (%s): %s\n", msg.Payload(), err)
+			// use string instead
+			message["payload"] = string(msg.Payload())
+		}
+	} else {
+		message["payload"] = messagePayload
 	}
-
 	if conf.WriteToConsole {
 		fmt.Printf("received message: %s\n", msg.Payload())
 	}
@@ -98,7 +110,7 @@ func (o *handler) handle(_ mqtt.Client, msg mqtt.Message) {
 		message["TOPIC"] = msg.Topic()
 		payload, jsonErr := json.Marshal(message)
 		if jsonErr != nil {
-			fmt.Printf("ERROR creating json payload: %s\n", err.Error())
+			fmt.Printf("ERROR creating json payload: %s\n", jsonErr.Error())
 		}
 		event1 := hec.NewEvent(string(payload))
 		err := o.spl.WriteEvent(event1)
