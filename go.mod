@@ -3,7 +3,7 @@ module github.com/aSauerwein/splunk-mqtt
 go 1.19
 
 require (
-	github.com/eclipse/paho.mqtt.golang v1.4.2
+	github.com/eclipse/paho.mqtt.golang v1.4.3
 	github.com/jhop310/splunk-hec-go v0.3.4
 	github.com/kelseyhightower/envconfig v1.4.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -12,6 +12,6 @@ require (
 require (
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
-	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	golang.org/x/net v0.8.0 // indirect
+	golang.org/x/sync v0.1.0 // indirect
 )
