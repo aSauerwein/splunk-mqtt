@@ -28,7 +28,7 @@ jobs:
       - name: Test
         run: go test -v ./...
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: splunk-mqtt-*
 
@@ -55,7 +55,7 @@ jobs:
       - name: Test
         run: go test -v ./...
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: splunk-mqtt-*
 
@@ -82,6 +82,6 @@ jobs:
       - name: Test
         run: go test -v ./...
       - name: Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           files: splunk-mqtt-*
